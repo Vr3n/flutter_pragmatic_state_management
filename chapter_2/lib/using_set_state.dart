@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class PageTwo extends StatefulWidget {
   int counter;
-  PageTwo({Key? key, required this.counter}) : super(key: key);
+  final Function(int) callback;
+  PageTwo({Key? key, required this.counter, required this.callback})
+      : super(key: key);
 
   @override
   State<PageTwo> createState() => _PageTwoState();
@@ -19,6 +21,7 @@ class _PageTwoState extends State<PageTwo> {
       // called again, and so nothing would appear to happen.
       widget.counter++;
     });
+    widget.callback(widget.counter);
   }
 
   @override
