@@ -24,6 +24,14 @@ class _ScreenBState extends State<ScreenB> {
       widget.counter++;
     });
     widget.callBack(widget.counter);
+    final snackBar = SnackBar(
+      content: Text('Incremented: ${widget.counter}'),
+      duration: const Duration(seconds: 1),
+      shape: const StadiumBorder(),
+      behavior: SnackBarBehavior.floating,
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   @override

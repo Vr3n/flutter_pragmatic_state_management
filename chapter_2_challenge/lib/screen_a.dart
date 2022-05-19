@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ScreenA extends StatefulWidget {
   ScreenA({Key? key, required this.callBack, required this.counter})
       : super(key: key);
@@ -23,6 +24,14 @@ class _ScreenAState extends State<ScreenA> {
       widget.counter++;
     });
     widget.callBack(widget.counter);
+    final snackBar = SnackBar(
+      content: Text('Incremented: ${widget.counter}'),
+      duration: const Duration(seconds: 1),
+      shape: const StadiumBorder(),
+      behavior: SnackBarBehavior.floating,
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   @override
