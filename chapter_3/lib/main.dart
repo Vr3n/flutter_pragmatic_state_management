@@ -1,14 +1,23 @@
-import 'package:chapter_3/provider_widget/provider_counter.dart';
-import 'package:chapter_3/widget/text_widget.dart';
+import 'package:chapter_3/notifier/counter_notifier.dart';
+import 'package:chapter_3/riverpod_widget/increment_button.dart';
+import 'package:chapter_3/riverpod_widget/riverpod_text.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+/* Provider Main Function */
+// void main() {
+//   runApp(ChangeNotifierProvider<Counter>(
+//     child: const MyApp(),
+//     create: (_) => Counter(),
+//   ));
+// }
 
 void main() {
-  runApp(ChangeNotifierProvider<Counter>(
-    child: const MyApp(),
-    create: (_) => Counter(),
-  ));
+  runApp(const ProviderScope(child: MyApp()));
 }
+
+// Creating Global provider for counter state.
+final counterProvider = StateNotifierProvider((ref) => CounterNotifier());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -73,15 +82,13 @@ class MyHomePage extends StatelessWidget {
             Text(
               'You have pushed the button this many times:',
             ),
-            TextWidget(),
+            // TextWidget(),
+            RiverPodTextWidget(),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => context.read<Counter>().increment(),
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      floatingActionButton:
+          const IncrementConsumer(), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
